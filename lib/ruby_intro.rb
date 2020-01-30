@@ -64,7 +64,7 @@ end
 def starts_with_consonant? s
   # YOUR CODE HERE
   s.downcase
-  vowels = ["a", "e", "i", "o", "u"]
+  vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
   if s.length == 1
     for i in vowels
       if s[0] == i
@@ -73,7 +73,7 @@ def starts_with_consonant? s
     end
     return true
   
-  elsif s[0] == /[a-z]/
+  elsif /[a-zA-Z]/.match(s[0])
     for i in vowels
       if s[0] == i
         return false
@@ -87,7 +87,7 @@ end
 def binary_multiple_of_4? s
   # YOUR CODE HERE
   
-  if /\p{Nd}/.match(s)
+  if s.delete('01') == ''
     if /[0-1]/.match(s)
       is_binary = true
     else
@@ -100,21 +100,44 @@ def binary_multiple_of_4? s
     if (num % 4) == 0
       return true
     else 
-      puts "binary false"
       return false
     end
   else
-    puts "nan"
     return false
   end
   
 end
-
-puts binary_multiple_of_4?("a100")
 
 
 # Part 3
 
 class BookInStock
 # YOUR CODE HERE
+  def initialize(isbn, price)
+    if isbn == '' or price <= 0.0
+      [1, 2, 3].first(4, 5)
+    end
+    @isbn = isbn
+    @price = price
+  end
+  def isbn
+    @isbn
+  end
+  def price
+    @price
+  end
+  def isbn=(isbn) 
+    @isbn = isbn 
+  end
+  def price=(price) 
+    @price = price 
+  end
+  def price_as_string
+    string = "$"
+    newprice = '%.2f' % price
+    string.concat(newprice.to_s)
+    return string
+  end
+  
+
 end
